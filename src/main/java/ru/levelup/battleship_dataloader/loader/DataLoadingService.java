@@ -21,7 +21,6 @@ import java.util.List;
 @AllArgsConstructor
 public class DataLoadingService implements CommandLineRunner {
 
-    private DataSource dataSource;
     private JdbcTemplate template;
 
     @Override
