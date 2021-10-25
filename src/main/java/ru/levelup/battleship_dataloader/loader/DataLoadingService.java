@@ -38,16 +38,15 @@ public class DataLoadingService implements CommandLineRunner {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void batchInsert(List<User> users) {
-        template.batchUpdate("insert into users (id, login, password, player_field_arranged, rating) " +
-                "values (?, ?, ?, ?, ?) ", new BatchPreparedStatementSetter() {
+        template.batchUpdate("insert into users (login, password, player_field_arranged, rating) " +
+                "values (?, ?, ?, ?) ", new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 User user = users.get(i);
-                ps.setInt(1, user.getId());
-                ps.setString(2, user.getLogin());
-                ps.setString(3, user.getPassword());
-                ps.setBoolean(4, user.isPlayerFieldArranged());
-                ps.setDouble(5, user.getRating());
+                ps.setString(1, user.getLogin());
+                ps.setString(2, user.getPassword());
+                ps.setBoolean(3, user.isPlayerFieldArranged());
+                ps.setDouble(4, user.getRating());
             }
 
             @Override
